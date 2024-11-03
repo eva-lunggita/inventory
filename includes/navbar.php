@@ -10,6 +10,9 @@
                     <a class="nav-link" href="/inventory/views/barang/index.php">Barang</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/inventory/views/penjualan/index.php">Penjualan</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/inventory/views/laporan/optimasi.php">Optimasi Paket</a>
                 </li>
                 <li class="nav-item">

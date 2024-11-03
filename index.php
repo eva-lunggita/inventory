@@ -12,12 +12,24 @@ $rekap = $laporan->getRekapKeuangan();
 
 $barang = new Barang($db);
 $total_items = $barang->read()->rowCount();
+
+// Hitung margin ratio dan ROI
+$margin_ratio = 0;
+$roi = 0;
+
+if ($rekap['actual_revenue'] > 0) {
+    $margin_ratio = ($rekap['actual_profit'] / $rekap['actual_revenue']) * 100;
+}
+
+if ($rekap['total_modal'] > 0) {
+    $roi = ($rekap['actual_profit'] / $rekap['total_modal']) * 100;
+}
 ?>
 
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h1>Dashboard</h1>
+    <div class="row mb-3">
+        <div class="col">
+            <h2>Dashboard</h2>
         </div>
     </div>
 
@@ -57,38 +69,35 @@ $total_items = $barang->read()->rowCount();
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Menu Cepat</h5>
+                    <h5 class="card-title mb-0">Statistik Detail</h5>
                 </div>
                 <div class="card-body">
-                    <div class="d-grid gap-2">
-                        <a href="views/barang/create.php" class="btn btn-primary">Tambah Barang</a>
-                        <a href="views/laporan/optimasi.php" class="btn btn-success">Optimasi Paket</a>
-                        <a href="views/laporan/keuangan.php" class="btn btn-info text-white">Laporan Keuangan</a>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center border-end">
+                                <h6 class="text-muted mb-2">Total Jenis Barang</h6>
+                                <h2 class="mb-0"><?php echo $total_items; ?></h2>
+                                <small class="text-muted">Items in Inventory</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center border-end">
+                                <h6 class="text-muted mb-2">Margin Ratio</h6>
+                                <h2 class="mb-0"><?php echo number_format($margin_ratio, 2); ?>%</h2>
+                                <small class="text-muted">Profit/Revenue Ratio</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h6 class="text-muted mb-2">Return on Investment</h6>
+                                <h2 class="mb-0"><?php echo number_format($roi, 2); ?>%</h2>
+                                <small class="text-muted">Profit/Modal Ratio</small>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Statistik</h5>
-                </div>
-                <div class="card-body">
-                    <p>Total Jenis Barang: <strong><?php echo $total_items; ?></strong></p>
-                    <?php
-                    if ($rekap['actual_revenue'] > 0) {
-                        $margin_ratio = ($rekap['actual_profit'] / $rekap['actual_revenue']) * 100;
-                        echo "<p>Margin Ratio: <strong>" . number_format($margin_ratio, 2) . "%</strong></p>";
-                    }
-                    
-                    if ($rekap['total_modal'] > 0) {
-                        $roi = ($rekap['actual_profit'] / $rekap['total_modal']) * 100;
-                        echo "<p>Return on Investment: <strong>" . number_format($roi, 2) . "%</strong></p>";
-                    }
-                    ?>
                 </div>
             </div>
         </div>
