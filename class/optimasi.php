@@ -1,13 +1,6 @@
 <?php
-class PaketPenjualan {
+class Optimasi {
     private $conn;
-    private $table_name = "paket_penjualan";
-
-    public $idPaket;
-    public $namaPaket;
-    public $deskripsi;
-    public $hargaPaket;
-    public $status;
 
     public function __construct($db) {
         $this->conn = $db;

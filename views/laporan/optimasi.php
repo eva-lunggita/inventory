@@ -1,7 +1,7 @@
 <?php
 include_once '../../includes/header.php';
 include_once '../../config/database.php';
-include_once '../../class/paketpenjualan.php';
+include_once '../../class/optimasi.php';
 ?>
 
 <div class="container">
@@ -42,9 +42,8 @@ include_once '../../class/paketpenjualan.php';
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $database = new Database();
         $db = $database->getConnection();
-        $paket = new PaketPenjualan($db);
-
-        $hasil = $paket->hitungOptimasiPaket($_POST['budget'], $_POST['minItems']);
+        $optimasi = new Optimasi($db); // Ganti ini dari PaketPenjualan ke Optimasi
+        $hasil = $optimasi->hitungOptimasiPaket($_POST['budget'], $_POST['minItems']);
     ?>
         <div class="card">
             <div class="card-header">

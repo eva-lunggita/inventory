@@ -31,14 +31,6 @@ CREATE TABLE barang (
     FOREIGN KEY (idPengguna) REFERENCES pengguna(idPengguna)
 );
 
-CREATE TABLE pembelian (
-    idPembelian INT PRIMARY KEY AUTO_INCREMENT,
-    jumlahPembelian INT,
-    hargaBeli DECIMAL(10,2),
-    idPengguna INT,
-    FOREIGN KEY (idPengguna) REFERENCES pengguna(idPengguna)
-);
-
 CREATE TABLE penjualan (
     idPenjualan INT PRIMARY KEY AUTO_INCREMENT,
     jumlahPenjualan INT,
@@ -50,15 +42,6 @@ CREATE TABLE penjualan (
     FOREIGN KEY (idBarang) REFERENCES barang(idBarang)
 );
 
-CREATE TABLE paket_penjualan (
-    idPaket INT PRIMARY KEY AUTO_INCREMENT,
-    namaPaket VARCHAR(100),
-    deskripsi TEXT,
-    hargaPaket DECIMAL(10,2),
-    status ENUM('active','inactive') DEFAULT 'active'
-);
-
--- Insert default admin user and access level
 INSERT INTO hakakses (namaAkses, keterangan) 
 VALUES ('admin', 'Administrator');
 
